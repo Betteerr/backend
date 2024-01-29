@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/betteerr/rssagg/internal/database"
@@ -77,4 +78,15 @@ func databaseFeedFollowsToFeedFollows(dbFeedFollows []database.FeedFollow) []Fee
 		feedFollows = append(feedFollows, databaseFeedFollowToFeedFollow(dbFeedFollow))
 	}
 	return feedFollows
+}
+
+type Post struct {
+	ID          uuid.UUID      `json:"id"`
+	CreatedAt   time.Time      `json:"created_at"`
+	UpdatedAt   time.Time      `json:"updated_at"`
+	Title       string         `json:"title"`
+	Description sql.NullString `json:"description"`
+	PublishedAt time.Time      `json:"published_at"`
+	Url         string         `json:"url"`
+	FeedID      uuid.UUID      `json:"feed_id"`
 }
